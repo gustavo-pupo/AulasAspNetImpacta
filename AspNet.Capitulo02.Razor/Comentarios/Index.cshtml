@@ -1,0 +1,105 @@
+﻿@using AspNet.Capitulo02.Razor.Comentarios
+
+@{ 
+    var aplicacao = new ComentarioAplicacao();
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Comentários</title>
+    <style>
+        /*tags*/
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #DEDAED;
+        }
+        hr{
+            border: 0;
+            height: 2px;
+            background: #333;
+            background-image: linear-gradient(to right, #ddd, #111, #ddd);
+        }
+        input[type=submit] {
+            width: 25%;
+            height: 100%;
+            margin: 2% 0 0 37.5%;
+        }
+
+        h1 {
+            text-align: center;
+        }
+        /*classes*/
+        .geral {
+            display: flex;
+            flex-direction:column;
+            /*align-items:center;*/
+            width:25%;
+            /*border: 1px solid black;*/
+            margin: 0 0 0 37.5%;
+        }
+        /*ids*/
+        #nome {
+            margin: 1%;
+            display: flex;
+            flex-direction: column;
+        }
+        #comentario {
+            margin: 1%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+
+    </style>
+</head>
+<body>
+
+    @{ 
+        if (IsPost)
+        {
+            aplicacao.Inserir(Request["nome"], Request["comentario"]); 
+        }
+    }
+
+    <h1>Comentários</h1>
+    <hr />
+    @*<form action="">*@
+    <form method="post">
+        <div class="geral">
+            <div id="nome">
+                <label for="nome">Nome:</label>
+                <input type="text" name="nome" />
+            </div>
+            <div id="comentario">
+                <label for="comentario">Comentário:</label>
+                <textarea name="comentario" rows="5"></textarea>
+            </div>
+
+            <input type="submit" name="enviar" value="Enviar" />
+        </div>
+    </form>
+    <hr />
+    @foreach (var comentario in aplicacao.Selecionar())
+    {
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Data</th>
+                    <th>Nome</th>
+                    <th>Comentário</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>@comentario.Data</td>
+                    <td>@comentario.Comentarista</td>
+                    <td>@comentario.Comentario</td>
+                </tr>
+            </tbody>
+        </table>
+    }
+</body>
+</html>
