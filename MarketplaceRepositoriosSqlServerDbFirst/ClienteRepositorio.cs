@@ -32,6 +32,7 @@ namespace MarketplaceRepositoriosSqlServerDbFirst
             using (var contexto = new MarketplaceEntities())
             {
                 return contexto.Clientes
+                .OrderBy(c => c.Nome)
                 .Skip((numeroPagina - 1) * qtdRegistros)
                 .Take(qtdRegistros)
                 .ToList();
