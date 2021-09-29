@@ -99,6 +99,7 @@ namespace MarketplaceMvc.Controllers
         }
 
         // GET: Clientes/Edit/5
+        [Authorize(Roles = "Administrador, Gerente")]
         public ActionResult Edit(int id)
         {
             return View(Mapear(clienteRepositorio.Selecionar(id)));
