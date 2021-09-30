@@ -4,6 +4,8 @@ using MarketplaceRepositoriosSqlServerDbFirst;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
+using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 
@@ -134,6 +136,13 @@ namespace MarketplaceMvc.Controllers
         // GET: Clientes/Delete/5
         public ActionResult Delete(int id)
         {
+            var usuarioLogado = (ClaimsPrincipal)Thread.CurrentPrincipal;
+
+            if (!usuarioLogado.HasClaim("Clientes","Excluir"))
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
             return View(Mapear(clienteRepositorio.Selecionar(id)));
         }
 
