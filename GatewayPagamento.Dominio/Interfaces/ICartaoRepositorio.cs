@@ -1,4 +1,6 @@
-﻿namespace GatewayPagamento.Dominio.Interfaces
+﻿using GatewayPagamento.Dominio.Entidades;
+
+namespace GatewayPagamento.Dominio.Interfaces
 {
     public interface ICartaoRepositorio
     {

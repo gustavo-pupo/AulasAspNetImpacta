@@ -1,10 +1,12 @@
-﻿using GatewayPagamento.Dominio;
+﻿using GatewayPagamento.Apoio;
+using GatewayPagamento.Dominio.Entidades;
 using System;
 using System.Collections.Generic;
 
+
 namespace GatewayPagamentoWebApi.Models
 {
-    public class PagamentoViewModel
+    public class PagamentoGetViewModel
     {
         public int Id { get; set; }
         public string MascaraCartao { get; set; }
@@ -13,9 +15,9 @@ namespace GatewayPagamentoWebApi.Models
         public int Status { get; set; }
         public string MensagemStatus { get; set; }
 
-        internal static IEnumerable<PagamentoViewModel> Mapear(List<Pagamento> pagamentos)
+        internal static IEnumerable<PagamentoGetViewModel> Mapear(List<Pagamento> pagamentos)
         {
-            var viewModels = new List<PagamentoViewModel>();
+            var viewModels = new List<PagamentoGetViewModel>();
 
             foreach (var pagamento in pagamentos)
             {
@@ -23,13 +25,14 @@ namespace GatewayPagamentoWebApi.Models
             }
             return viewModels;
         }
-        private static PagamentoViewModel Mapear(Pagamento pagamento)
+        private static PagamentoGetViewModel Mapear(Pagamento pagamento)
         {
-            var viewModel = new PagamentoViewModel();
+            var viewModel = new PagamentoGetViewModel();
 
             viewModel.Id = pagamento.Id;
 
             string numeroCartao = pagamento.Cartao.Numero;
+
             viewModel.MascaraCartao = $"{numeroCartao.Substring(0,6)}...{numeroCartao.Substring(numeroCartao.Length - 4)}";
 
             viewModel.NumeroPedido = pagamento.NumeroPedido;
@@ -37,6 +40,9 @@ namespace GatewayPagamentoWebApi.Models
             viewModel.Valor = pagamento.Valor;
 
             viewModel.Status = (int)pagamento.Status;
+
+            //viewModel.MensagemStatus = pagamento.Status.ObterDescricao(pagamento.Status);
+            viewModel.MensagemStatus = pagamento.Status.ObterDescricao();
 
             return viewModel;
         }

@@ -1,4 +1,4 @@
-﻿using GatewayPagamento.Dominio;
+﻿using GatewayPagamento.Dominio.Entidades;
 using System.Data.Entity.ModelConfiguration;
 
 namespace GatewayPagamentos.Repositorios.SqlServer.CodeFirst.ModelConfiguration

@@ -1,4 +1,4 @@
-﻿using GatewayPagamento.Dominio;
+﻿using GatewayPagamento.Dominio.Entidades;
 using GatewayPagamento.Dominio.Interfaces;
 using System;
 using System.Collections.Generic;

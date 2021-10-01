@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GatewayPagamento.Dominio
+namespace GatewayPagamento.Dominio.Entidades
 {
     public class Pagamento
     {
@@ -12,7 +12,7 @@ namespace GatewayPagamento.Dominio
         public Cartao Cartao { get; set; }
         public string NumeroPedido { get; set; }
         public decimal Valor { get; set; }
-        public DateTime Data { get; set; }
+        public DateTime Data { get; set; } = DateTime.Now;
         public StatusPagamento Status { get; set; }
     }
 }

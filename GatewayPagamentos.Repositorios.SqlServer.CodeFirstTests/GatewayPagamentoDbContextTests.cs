@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GatewayPagamento.Dominio;
+using GatewayPagamento.Dominio.Entidades;
 
 namespace GatewayPagamentos.Repositorios.SqlServer.CodeFirst.Tests
 {

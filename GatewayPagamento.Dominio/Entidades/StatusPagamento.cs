@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace GatewayPagamento.Dominio
+namespace GatewayPagamento.Dominio.Entidades
 {
     public enum StatusPagamento
     {
@@ -14,6 +14,9 @@ namespace GatewayPagamento.Dominio
         CartaoInexistente = 3,
 
         [Description("CERTIN")]
-        PagamentoOK = 4 
+        PagamentoOK = 4,
+
+        Quinto = 5
+
     }
 }

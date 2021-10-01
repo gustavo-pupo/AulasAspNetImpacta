@@ -1,4 +1,5 @@
-﻿using GatewayPagamento.Dominio.Interfaces;
+﻿using GatewayPagamento.Dominio.Entidades;
+using GatewayPagamento.Dominio.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;

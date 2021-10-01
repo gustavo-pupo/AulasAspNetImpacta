@@ -1,4 +1,4 @@
-﻿namespace GatewayPagamento.Dominio
+﻿namespace GatewayPagamento.Dominio.Entidades
 {
     public class Cartao
     {
