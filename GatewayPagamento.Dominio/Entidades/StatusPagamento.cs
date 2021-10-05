@@ -4,6 +4,9 @@ namespace GatewayPagamento.Dominio.Entidades
 {
     public enum StatusPagamento
     {
+        [Description("Indefinido")]
+        NaoDefinido = 0,
+
         [Description("Saldo Indisponível")]
         LimiteInsuficiente = 1,
 

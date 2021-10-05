@@ -20,32 +20,36 @@ namespace GatewayPagamento.Dominio.Servicos
         }
 
 
-        public StatusPagamento Inserir(Pagamento pagamento)
+        public void Inserir(Pagamento pagamento)
         {
             var cartao = cartaoRepositorio.Selecionar(pagamento.Cartao.Numero);
 
             if (cartao == null)
             {
-                return StatusPagamento.CartaoInexistente;
+                pagamento.Status = StatusPagamento.CartaoInexistente;
+                
             }
 
             var pagamentosExistentes = pagamentoRepositorio.Selecionar(p => p.NumeroPedido == pagamento.NumeroPedido);
 
             if (pagamentosExistentes.Any())
             {
-                return StatusPagamento.PedidoJaPago;
+                pagamento.Status = StatusPagamento.PedidoJaPago;
             }
 
-            if (pagamento.Valor > cartao.Limite)
+            if (pagamento.Valor > cartao?.Limite)
             {
-                return StatusPagamento.LimiteInsuficiente;
+                pagamento.Status = StatusPagamento.LimiteInsuficiente;
             }
 
-            pagamento.Status = StatusPagamento.PagamentoOK;
+            if (pagamento.Status == StatusPagamento.NaoDefinido)
+            {
+                pagamento.Status = StatusPagamento.PagamentoOK;
 
-            pagamentoRepositorio.Inserir(pagamento);
+                pagamentoRepositorio.Inserir(pagamento); 
+            }
 
-            return StatusPagamento.PagamentoOK;
+            //return StatusPagamento.PagamentoOK;
         }
     }
 }

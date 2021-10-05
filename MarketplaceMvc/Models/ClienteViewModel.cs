@@ -24,5 +24,7 @@ namespace MarketplaceMvc.Models
         [Required]
         [EmailAddress]
         public string Email { get; set; }
+
+        public int? IdCartao { get; set; }
     }
 }

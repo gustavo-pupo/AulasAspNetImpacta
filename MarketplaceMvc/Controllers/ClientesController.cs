@@ -44,7 +44,9 @@ namespace MarketplaceMvc.Controllers
             viewModel.Id = cliente.Id;
             viewModel.Nome = cliente.Nome;
             viewModel.Telefone = cliente.Telefone;
-            
+            //viewModel.IdCartao = cliente.Cartoes.FirstOrDefault(c => c.Cliente.Id == cliente.Id);
+            viewModel.IdCartao = (cliente.Cartoes?.FirstOrDefault()?.Id);
+
 
 
             return viewModel;

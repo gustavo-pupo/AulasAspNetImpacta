@@ -171,6 +171,9 @@
     <Compile Include="Controllers\ClientesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PagamentosController.cs" />
+    <Compile Include="Models\PagamentoCreateViewModel.cs" />
+    <Compile Include="Models\PagamentoIndexViewModel.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -202,6 +205,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\methods_pt.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -242,6 +246,8 @@
     <Content Include="Views\Clientes\Details.cshtml" />
     <Content Include="Views\Clientes\Edit.cshtml" />
     <Content Include="Views\Clientes\Delete.cshtml" />
+    <Content Include="Views\Pagamentos\Index.cshtml" />
+    <Content Include="Views\Pagamentos\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -260,6 +266,10 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MarketplaceRepositorios.Http\MarketplaceRepositorios.Http.csproj">
+      <Project>{89A54E32-E867-4B59-BE09-31650AB6B316}</Project>
+      <Name>MarketplaceRepositorios.Http</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MarketplaceRepositoriosSqlServerDbFirst\MarketplaceRepositoriosSqlServerDbFirst.csproj">
       <Project>{e59c1e0a-6852-44bf-aa89-75fbc99aace3}</Project>
       <Name>MarketplaceRepositoriosSqlServerDbFirst</Name>

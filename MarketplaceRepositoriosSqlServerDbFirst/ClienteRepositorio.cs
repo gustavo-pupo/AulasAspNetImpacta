@@ -23,7 +23,9 @@ namespace MarketplaceRepositoriosSqlServerDbFirst
 
             using (var contexto = new MarketplaceEntities())
             {
-                return contexto.Clientes.SingleOrDefault(c => c.Id == id); 
+                return contexto.Clientes
+                    .Include(c => c.Cartoes)
+                    .SingleOrDefault(c => c.Id == id); 
             }
         }
 
@@ -32,6 +34,7 @@ namespace MarketplaceRepositoriosSqlServerDbFirst
             using (var contexto = new MarketplaceEntities())
             {
                 return contexto.Clientes
+                .Include(c => c.Cartoes)
                 .OrderBy(c => c.Nome)
                 .Skip((numeroPagina - 1) * qtdRegistros)
                 .Take(qtdRegistros)
