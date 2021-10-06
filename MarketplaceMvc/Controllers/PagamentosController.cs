@@ -61,7 +61,7 @@ namespace MarketplaceMvc.Controllers
                 
                 return RedirectToAction("Index", new { idCartao = TempData["idCartao"]});
             }
-            catch(Exception ex)
+            catch/*(Exception ex)*/
             {
                 //Logar(ex)
                 return View("Error");
