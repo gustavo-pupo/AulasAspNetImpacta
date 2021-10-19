@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using ExpoCenter.Dominio.Entidades;
+using ExpoCenter.Mvc.Filters;
 using ExpoCenter.Mvc.Models;
 using ExpoCenter.Repositorios.SqlServer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
@@ -10,9 +12,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using static ExpoCenter.Dominio.Entidades.PerfilUsuario;
 
 namespace ExpoCenter.Mvc.Controllers
 {
+    [Authorize]
     public class ParticipantesController : Controller
     {
         private readonly ExpoCenterDbContext dbContext;//= new ExpoCenterDbContext();
@@ -25,6 +29,7 @@ namespace ExpoCenter.Mvc.Controllers
         }
 
         // GET: ParticipantesController
+        [AllowAnonymous]
         public ActionResult Index()
         {
             return View(mapper.Map<List<ParticipanteIndexViewModel>>(dbContext.Participantes));
@@ -78,6 +83,9 @@ namespace ExpoCenter.Mvc.Controllers
         }
 
         // GET: ParticipantesController/Edit/5
+        //[Authorize(Roles = "Master")]//empilhamento é o "and" lógico 
+        //[Authorize(Roles = "Admin, Gerente")]//virgula é o "or" lógico
+        [AuthorizeRole(Administrador,  Gerente)]
         public ActionResult Edit(int id)
         {
             //var participante = dbContext.Participantes.Include(p => p.Eventos).SingleOrDefault(id);
@@ -106,6 +114,7 @@ namespace ExpoCenter.Mvc.Controllers
         // POST: ParticipantesController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeRole(Administrador, Gerente)]
         public ActionResult Edit(ParticipanteCreateViewModel viewModel)
         {
             try
@@ -171,8 +180,14 @@ namespace ExpoCenter.Mvc.Controllers
         }
 
         // GET: ParticipantesController/Delete/5
+        //[AuthorizeRole(Administrador)]
         public ActionResult Delete(int id)
         {
+            if (!User.HasClaim("Participantes","Excluir"))
+            {
+                return new ForbidResult();
+            }
+
             return View();
         }
 

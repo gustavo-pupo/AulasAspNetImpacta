@@ -42,8 +42,10 @@ namespace ExpoCenter.Mvc
 
             services.AddDatabaseDeveloperPageExceptionFilter();
 
-            services.AddDefaultIdentity<IdentityUser>(options => {
-                options.SignIn.RequireConfirmedAccount = true;
+            //services.AddDefaultIdentity<IdentityUser>(options => {
+            services.AddIdentity<IdentityUser, IdentityRole>(options => {
+
+                    options.SignIn.RequireConfirmedAccount = true;
 
                 options.Password.RequireDigit = false;
                 options.Password.RequireLowercase = false;
@@ -51,7 +53,8 @@ namespace ExpoCenter.Mvc
                 options.Password.RequireUppercase = false;
                 options.Password.RequiredLength = 3;
             })
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultUI();
             services.AddControllersWithViews();
         }
 
