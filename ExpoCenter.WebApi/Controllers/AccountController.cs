@@ -3,9 +3,13 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace ExpoCenter.WebApi.Controllers
@@ -29,7 +33,47 @@ namespace ExpoCenter.WebApi.Controllers
         //[Route("login")]
         public async Task<ActionResult<UserToken>> Login(LoginModel model)
         {
-            throw new NotImplementedException();
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var resultadoLogin = await signInManager.PasswordSignInAsync(model.Email, model.Password, isPersistent: false, lockoutOnFailure: false);
+
+            if (resultadoLogin.Succeeded)
+            {
+                return Ok(BuildToken(model));
+            }
+            ModelState.AddModelError("", "Login Inválido");
+            return BadRequest(ModelState);
+        }
+        private UserToken BuildToken(LoginModel userInfo)
+        {
+            var claims = new[]
+            {
+                new Claim(JwtRegisteredClaimNames.UniqueName, userInfo.Email),
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                new Claim(ClaimTypes.Role, "Agente") //userManager.GetClaimsAsync
+                
+            };
+
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWT:Key"]));
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+            // tempo de expiração do token: 1 hora
+            var expiration = DateTime.UtcNow.AddHours(1);
+
+            JwtSecurityToken token = new JwtSecurityToken(
+               issuer: null,
+               audience: null,
+               claims: claims,
+               expires: expiration,
+               signingCredentials: creds);
+
+            return new UserToken()
+            {
+                Token = new JwtSecurityTokenHandler().WriteToken(token),
+                Expiration = expiration
+            };
         }
     }
 }

@@ -56,6 +56,14 @@ namespace ExpoCenter.Mvc
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultUI();
             services.AddControllersWithViews();
+
+            services.AddAuthorization(o => o
+                //.AddPolicy("ParticipantesExcluir", p => p
+                //    .RequireRole("Gerente")
+                //    .RequireClaim("Participantes", "Excluir"))
+                .AddPolicy("ParticipantesExcluir", p => p
+                    .RequireAssertion(c => c.User.IsInRole("Gerente")||c.User.HasClaim("Participantes", "Excluir")))
+                );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

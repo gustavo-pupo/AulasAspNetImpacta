@@ -181,12 +181,13 @@ namespace ExpoCenter.Mvc.Controllers
 
         // GET: ParticipantesController/Delete/5
         //[AuthorizeRole(Administrador)]
+        [Authorize(Policy = "ParticipantesExcluir")]
         public ActionResult Delete(int id)
         {
-            if (!User.HasClaim("Participantes","Excluir"))
-            {
-                return new ForbidResult();
-            }
+            //if (!User.HasClaim("Participantes","Excluir")||User.IsInRole("Gerente"))
+            //{
+            //    return new ForbidResult();
+            //}
 
             return View();
         }

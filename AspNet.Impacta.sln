@@ -35,7 +35,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExpoCenter.Repositorios.Sql
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExpoCenter.Mvc", "ExpoCenter.Mvc\ExpoCenter.Mvc.csproj", "{03564018-BC46-4257-883E-327636474852}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpoCenter.WebApi", "ExpoCenter.WebApi\ExpoCenter.WebApi.csproj", "{DA3EB4CC-F575-44BA-901A-79C23A7980A2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExpoCenter.WebApi", "ExpoCenter.WebApi\ExpoCenter.WebApi.csproj", "{DA3EB4CC-F575-44BA-901A-79C23A7980A2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpoCenter.Html", "ExpoCenter.Html\ExpoCenter.Html.csproj", "{CEE29461-A6C5-433F-8C82-2EDAEDC3672C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -99,6 +101,10 @@ Global
 		{DA3EB4CC-F575-44BA-901A-79C23A7980A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DA3EB4CC-F575-44BA-901A-79C23A7980A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DA3EB4CC-F575-44BA-901A-79C23A7980A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CEE29461-A6C5-433F-8C82-2EDAEDC3672C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CEE29461-A6C5-433F-8C82-2EDAEDC3672C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CEE29461-A6C5-433F-8C82-2EDAEDC3672C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CEE29461-A6C5-433F-8C82-2EDAEDC3672C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -117,6 +123,7 @@ Global
 		{0AE59AB9-07DF-4A0A-970E-6BF242463E2B} = {D7F25555-C4B4-4279-BF47-F950E1BED1D2}
 		{03564018-BC46-4257-883E-327636474852} = {D7F25555-C4B4-4279-BF47-F950E1BED1D2}
 		{DA3EB4CC-F575-44BA-901A-79C23A7980A2} = {D7F25555-C4B4-4279-BF47-F950E1BED1D2}
+		{CEE29461-A6C5-433F-8C82-2EDAEDC3672C} = {D7F25555-C4B4-4279-BF47-F950E1BED1D2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3C753DEA-F36E-4D5A-86B0-27447F9D2605}

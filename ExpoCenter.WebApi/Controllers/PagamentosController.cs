@@ -7,11 +7,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ExpoCenter.Dominio.Entidades;
 using ExpoCenter.Repositorios.SqlServer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace ExpoCenter.WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class PagamentosController : ControllerBase
     {
         private readonly ExpoCenterDbContext _context;
@@ -23,6 +26,7 @@ namespace ExpoCenter.WebApi.Controllers
 
         // GET: api/Pagamentos
         [HttpGet]
+        [Authorize(Roles = "Agente")]
         public async Task<ActionResult<IEnumerable<Pagamento>>> GetPagamentos()
         {
             return await _context.Pagamentos.ToListAsync();
